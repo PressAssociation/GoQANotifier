@@ -15,3 +15,7 @@ $ go get github.com/gorilla/mux
 $ go build src/main.go
 $ ./main
 ```
+
+## Example
+
+![An example of the output on bamboo](bambooexample.png)
