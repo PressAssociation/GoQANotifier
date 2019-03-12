@@ -39,10 +39,10 @@ curl -X POST localhost:8000/ping/qa/test -H 'Content-type: application/json' -d 
 curl localhost:8000/ping
 
 // Get all pings for environment
-curl localhost:8000/ping/qa
+curl localhost:8000/ping/<env>
 
 // Get all pings for environment and service
-curl localhost:8000/ping/qa/test
+curl localhost:8000/ping/<env>/<tag>
 
 // Get the image for service with last pass and fail
 curl localhost:8000/ping/qa/test.png
