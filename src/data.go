@@ -115,7 +115,6 @@ func readFromfile() {
 
 	// Loop through lines & turn into object
 	for _, line := range lines {
-
 		var passPing *Ping
 		if line[2] != "" {
 			passPing = createPing(line[1], true)
