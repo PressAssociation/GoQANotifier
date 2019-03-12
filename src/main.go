@@ -71,12 +71,14 @@ func GetImage(w http.ResponseWriter, r *http.Request) {
          buffer := new(bytes.Buffer)
          if err := dc.EncodePNG(buffer); err != nil {
              log.Print("unable to encode image.")
+             http.Error(w, "Unable to encode image.", http.StatusInternalServerError)
          }
 
          w.Header().Set("Content-Type", "image/jpeg")
          w.Header().Set("Content-Length", strconv.Itoa(len(buffer.Bytes())))
          if _, err := w.Write(buffer.Bytes()); err != nil {
              log.Println("unable to write image.")
+             http.Error(w, "Unable to write image.", http.StatusInternalServerError)
          }
     } else {
       http.Error(w, "Not Found", http.StatusNotFound)
