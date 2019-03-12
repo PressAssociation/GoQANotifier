@@ -79,6 +79,8 @@ func GetImage(w http.ResponseWriter, r *http.Request) {
          if _, err := w.Write(buffer.Bytes()); err != nil {
              log.Println("unable to write image.")
          }
+    } else {
+      http.Error(w, "Not Found", http.StatusNotFound)
     }
 }
 
@@ -94,6 +96,7 @@ func CreatePing(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         //Need a body
         fmt.Println("Error decoding json.")
+        http.Error(w, "Bad Request", http.StatusBadRequest)
         return
     }
 
