@@ -5,7 +5,6 @@ import (
     "log"
     "net/http"
     "github.com/gorilla/mux"
-    "fmt"
     "github.com/fogleman/gg"
     "bytes"
     "strconv"
@@ -71,7 +70,7 @@ func GetImage(w http.ResponseWriter, r *http.Request) {
 
          buffer := new(bytes.Buffer)
          if err := dc.EncodePNG(buffer); err != nil {
-             log.Println("unable to encode image.")
+             log.Print("unable to encode image.")
          }
 
          w.Header().Set("Content-Type", "image/jpeg")
@@ -95,7 +94,7 @@ func CreatePing(w http.ResponseWriter, r *http.Request) {
     err := decoder.Decode(&t)
     if err != nil {
         //Need a body
-        fmt.Println("Error decoding json.")
+        log.Print("Error decoding json.")
         http.Error(w, "Bad Request", http.StatusBadRequest)
         return
     }
@@ -103,13 +102,9 @@ func CreatePing(w http.ResponseWriter, r *http.Request) {
     ping := createPing(params["id"], t.Passed)
     attr := getService(params["id"], params["env"]);
 
-    fmt.Print(*ping);
-    fmt.Print(" updating " + params["id"] + " " + params["env"] + ". ");
+    log.Printf("%+v - Env: %s Service: %s.", *ping, params["env"], params["id"]);
 
-    if *attr != (Service{}) {
-      fmt.Println("Previously existing service...")
-    } else {
-      fmt.Println("New service...")
+    if *attr == (Service{}) {
       attr = createService(params["id"], params["env"])
     }
 
