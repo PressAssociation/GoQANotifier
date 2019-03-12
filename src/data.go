@@ -52,7 +52,7 @@ func createService(id string, env string) *Service {
     service := Service{ID: id, Env: env}
     services = append(services, service)
 
-    return &service
+    return &services[len(services)-1]
 }
 
 func updateService(service *Service, ping *Ping, hasPassedTest bool) {
